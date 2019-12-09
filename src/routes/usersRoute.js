@@ -5,7 +5,8 @@ const router = Router();
 const usersController = require('../controllers/usersController');
 
 // user rout
-router.route('/').get(usersController.getAll);
+router.route('/').get(usersController.getAll); // /users/
+
 router.route('/:id').get(usersController.get);
 router.route('/').put(usersController.put);
 router.route('/').post(usersController.post);

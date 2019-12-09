@@ -119,30 +119,35 @@ module.exports = {
     });
   },
   uploadImg: async function (req, res) {
-    console.log(req.files)
+    console.log(req.files.file);
     //configuring parameters
     if (req.files) {
-      const nameFile = req.files.file.name.split('.')
-      const params = {
-        Bucket : 'practica-medellin',
-        Body   : req.files.file.data,
-        Key    : "posts/" + Date.now() + "." +nameFile[nameFile.length - 1],
-        ACL    : 'public-read'
-      };
-  
-      s3.upload(params, function (err, data) {
-        //handle error
-        if (err) {
-          console.log("Error", err);
-          res.json({status:'err', message: 'Error al subir el archivo!.', detail: err});
-        }
-  
-        //success
-        if (data) {
-          res.json({status:'ok', location_image: data.Location});
-          console.log("Uploaded in:", data.Location);
-        }
-      });
+      const nameFile = req.files.file.name.split('.');
+      const typeFile = req.files.file.mimetype;
+      if(typeFile==="image/jpeg"){
+        const params = {
+          Bucket : 'practica-medellin',
+          Body   : req.files.file.data,
+          Key    : "posts/" + Date.now() + "." +nameFile[nameFile.length - 1],
+          ACL    : 'public-read'
+        };
+    
+        s3.upload(params, function (err, data) {
+          //handle error
+          if (err) {
+            console.log("Error", err);
+            res.json({status:'err', message: 'Error al subir el archivo!.', detail: err});
+          }
+    
+          //success
+          if (data) {
+            res.json({status:'ok', location_image: data.Location});
+            console.log("Uploaded in:", data.Location);
+          }
+        });
+      }else{
+        res.json({status: 'err', message: 'Tipo de archivo no admitido'})
+      }
     }else{
       res.json({status:'ok'});
     }
