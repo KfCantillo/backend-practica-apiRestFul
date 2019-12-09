@@ -7,8 +7,8 @@ const path = require('path');
 
 //cconfigurar AWS con las claves de acceso
 AWS.config.update({
-  accessKeyId: 'AKIARMTLG5FLZBVV2OVA',
-  secretAccessKey: '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',
+  accessKeyId: 'key-id',
+  secretAccessKey: 'Access-Key',
 });
 const s3 = new AWS.S3();
 
