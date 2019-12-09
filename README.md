@@ -6,7 +6,7 @@ Practica API REST con Node.js y MongoDB, el cual esta enfocada en publicaciones 
 
 ### Desarollado bajo
 
-- node.js (v6.10.0)
+- node.js (v8.10.0)
 - express
 
 ### Base de datos
